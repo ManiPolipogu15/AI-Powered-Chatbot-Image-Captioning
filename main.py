@@ -7,23 +7,25 @@ from streamlit_option_menu import option_menu
 from gemini_utilites import (load_gemini_pro_model,
                             gemini_pro_response,
                             gemini_pro_vision_response,
-                            embeddings_model_response)
+                            )
 
 
 working_dir = os.path.dirname(os.path.abspath(__file__))
 
 st.set_page_config(
-    page_title="Gemini AI",
-    page_icon="🧠",
-    layout="centered",
+    page_title="Manik AI",
+    page_icon="💻",
+    layout="wide",
 )
 
+
 with st.sidebar:
-    selected = option_menu('Gemini AI',
-                           ['ChatBot',
+    image_url = "image_path"
+    st.image(image_url, width=300)
+    selected = option_menu('Man AI',
+                           ['Ask me anything',
                             'Image Captioning',
-                            'Embed text',
-                            'Ask me anything'],
+                            ],
                            menu_icon='robot', icons=['chat-dots-fill', 'image-fill', 'textarea-t', 'patch-question-fill'],
                            default_index=0
                            )
@@ -37,8 +39,8 @@ def translate_role_for_streamlit(user_role):
         return user_role
 
 
-# chatbot page
-if selected == 'ChatBot':
+# Ask- me  page
+if selected == 'Ask me anything':
     model = load_gemini_pro_model()
 
     # Initialize chat session in Streamlit if not already present
@@ -46,7 +48,7 @@ if selected == 'ChatBot':
         st.session_state.chat_session = model.start_chat(history=[])
 
     # Display the chatbot's title on the page
-    st.title("🤖 ChatBot")
+    st.title("🤖 ManAI")
 
     # Display the chat history
     for message in st.session_state.chat_session.history:
@@ -54,7 +56,7 @@ if selected == 'ChatBot':
             st.markdown(message.parts[0].text)
 
     # Input field for user's message
-    user_prompt = st.chat_input("Ask Gemini-Pro...")  # Renamed for clarity
+    user_prompt = st.chat_input("Ask Lead-AI...")  # Renamed for clarity
     if user_prompt:
         # Add user's message to chat and display it
         st.chat_message("user").markdown(user_prompt)
@@ -92,27 +94,4 @@ if selected == "Image Captioning":
             st.info(caption)
 
 
-# text embedding model
-if selected == "Embed text":
 
-    st.title("🔡 Embed Text")
-
-    # text box to enter prompt
-    user_prompt = st.text_area(label='', placeholder="Enter the text to get embeddings")
-
-    if st.button("Get Response"):
-        response = embeddings_model_response(user_prompt)
-        st.markdown(response)
-
-
-# text embedding model
-if selected == "Ask me anything":
-
-    st.title("❓ Ask me a question")
-
-    # text box to enter prompt
-    user_prompt = st.text_area(label='', placeholder="Ask me anything...")
-
-    if st.button("Get Response"):
-        response = gemini_pro_response(user_prompt)
-        st.markdown(response)
