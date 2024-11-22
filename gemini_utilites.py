@@ -30,17 +30,6 @@ def gemini_pro_vision_response(prompt, image):
     result = response.text
     return result
 
-
-# get response from embeddings model - text to embeddings
-def embeddings_model_response(input_text):
-    embedding_model = "models/embedding-001"
-    embedding = genai.embed_content(model=embedding_model,
-                                    content=input_text,
-                                    task_type="retrieval_document")
-    embedding_list = embedding["embedding"]
-    return embedding_list
-
-
 # get response from Gemini-Pro model - text to text
 def gemini_pro_response(user_prompt):
     gemini_pro_model = genai.GenerativeModel("gemini-pro")
@@ -48,17 +37,3 @@ def gemini_pro_response(user_prompt):
     result = response.text
     return result
 
-
-# result = gemini_pro_response("What is Machine Learning")
-# print(result)
-# print("-"*50)
-#
-#
-# image = Image.open("test_image.png")
-# result = gemini_pro_vision_response("Write a short caption for this image", image)
-# print(result)
-# print("-"*50)
-#
-#
-# result = embeddings_model_response("Machine Learning is a subset of Artificial Intelligence")
-# print(result)
