@@ -1,7 +1,7 @@
 AI-powered text and image interaction. Specifically, it integrates Google's Gemini Pro models for both text and image processing, allowing users to interact with an AI system for tasks like chat-based conversations and image captioning.
 
 
-Project: "Manik AI - AI-Powered Chatbot & Image Captioning"
+Project: "AI - AI-Powered Chatbot & Image Captioning"
 AI Chatbot (Text-Based Interaction):
 
 Purpose: Users can ask questions to the AI and receive text-based responses.
